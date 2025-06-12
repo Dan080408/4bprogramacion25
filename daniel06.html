@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.cdnfonts.com/css/so-this-is-it" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #FF0101;
+        }
+        .pokeImg {
+            width: 250px;
+            height: 250px;
+            position: absolute;
+            top: 100px;
+            right: 200px;
+        }
+        button {
+            width: 50px;
+            height: 50px;
+            background-color: #000000;
+            border-color: rgb(0, 0, 0);
+            border-radius: 10px;
+            position: absolute;
+            top: 540px;
+            left: 1150px;
+            color: white;
+        }
+        .pokeImg1 {
+            position: absolute;
+            font-family: Arial, Helvetica, sans-serif;
+            color: rgb(0, 0, 0);
+            font-size: 20px;
+        }
+        .placeholder {
+            width: 120px;
+            height: 50px;
+            position: absolute;
+            top: 400px;
+            right: 250px;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 25px;
+            background-color: rgb(0, 0, 0);
+            color: white;
+            text-align: center;
+            text-shadow: 1px 1px 1px #ffffff;
+        }
+    </style>
+</head>
+<body>
+     <nav class="navbar navbar-Light" style="background-color: #d2650c;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html" style="color: white;">INICIO</a>
+            
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="html" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">UNIDAD 1</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="daniel01.php">Mostrar Datos</a><br>
+                            <a class="dropdown-item" href="daniel02.php">Práctica 2</a><br>
+                            <a class="dropdown-item" href="daniel03.php">Práctica 3</a>
+                        </div>
+                    </li>
+                </ul>
+                
+                <ul class="nav navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="html" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">UNIDAD 2</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="cristian01.php">Práctica 4</a><br>
+                            <a class="dropdown-item" href="daniel05.php">Práctica 5</a><br>
+                            <a class="dropdown-item" href="daniel06.html">Práctica 6</a>
+                        </div>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="html" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">UNIDAD 3</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="daniel07.html">Práctica 7</a><br>
+                            <a class="dropdown-item" href="daniel08.html">Práctica 8</a><br>
+                            <a class="dropdown-item" href="daniel09.html">Práctica 9</a><br>
+                            <a class="dropdown-item" href="daniel10.php">Práctica Final</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <img src="Pikachu.jpeg" width="1500px">
+    <input type="text" placeholder="" id="pokeName" class="placeholder">
+    <img src="pokebola.png" alt="pokebola" id="pokeImg" class="pokeImg">
+
+    <div id="pokename" class="pokeImg1" style="left: 700px; top: 300px;">Nombre:</div>
+    <div id="pokeHe" class="pokeImg1" style="left: 670px; top: 180px;">Altura:</div>
+    <div id="pokeWe" class="pokeImg1" style="left: 640px; top: 210px;">Peso:</div>
+    <div id="pokeType" class="pokeImg1" style="left: 610px; top: 240px;">Tipo:</div>
+    <div id="pokeitem" class="pokeImg1" style="left: 580px; top: 270px;">Item:</div>
+    <div id="pokemove1" class="pokeImg1" style="left: 550px; top: 310px;">Movimiento 1:</div>
+    <div id="pokemove2" class="pokeImg1" style="left: 510px; top: 340px;">Movimiento 2:</div>
+    <div id="pokemove3" class="pokeImg1" style="left: 480px; top: 370px;">Movimiento 3:</div>
+    <div id="pokemove4" class="pokeImg1" style="left: 450px; top: 400px;">Movimiento 4:</div>
+
+    <button onclick="fetchPokemon()">Fetch</button>
+    <div class="grafica">
+        <canvas id="miCanvas"></canvas>
+    </div>
+
+    <script>
+        const pokeImage = (url) => {
+            const pokeImgTag = document.getElementById("pokeImg");
+            pokeImgTag.src = url;
+        };
+
+        const fetchPokemon = () => {
+            const pokeNameInput = document.getElementById("pokeName");
+            let pokeName = pokeNameInput.value.trim().toLowerCase();
+            if (!pokeName) return alert("Escribe un nombre de Pokémon.");
+
+            const url = `https://pokeapi.co/api/v2/pokemon/${pokeName}`;
+            fetch(url)
+                .then((res) => {
+                    if (res.status !== 200) {
+                        alert("Pokémon no encontrado.");
+                        throw new Error("Pokémon no encontrado");
+                    }
+                    return res.json();
+                })
+                .then((data) => {
+                    if (data) {
+                        let pokeImg = data.sprites.front_default;
+                        pokeImage(pokeImg);
+
+                        document.getElementById('pokename').innerHTML = `Nombre: ${data.name}`;
+                        document.getElementById('pokeHe').innerHTML = `Altura: ${data.height}`;
+                        document.getElementById('pokeWe').innerHTML = `Peso: ${data.weight}`;
+                        document.getElementById('pokeitem').innerHTML = `Habilidad: ${data.abilities[0].ability.name}`;
+                        document.getElementById('pokeType').innerHTML = `Tipo: ${data.types[0].type.name}`;
+                        document.getElementById('pokemove1').innerHTML = `Movimiento 1: ${data.moves[0]?.move.name || 'N/A'}`;
+                        document.getElementById('pokemove2').innerHTML = `Movimiento 2: ${data.moves[1]?.move.name || 'N/A'}`;
+                        document.getElementById('pokemove3').innerHTML = `Movimiento 3: ${data.moves[2]?.move.name || 'N/A'}`;
+                        document.getElementById('pokemove4').innerHTML = `Movimiento 4: ${data.moves[3]?.move.name || 'N/A'}`;
+
+                        const ctx = document.getElementById("miCanvas").getContext("2d");
+                        if (window.miChart) window.miChart.destroy();
+
+                        window.miChart = new Chart(ctx, {
+                            type: "bar",
+                            data: {
+                                labels: ["HP", "Attack", "Defense", "Special-A", "Special-D", "Speed"],
+                                datasets: [{
+                                    label: `${data.name}'s Stats`,
+                                    data: data.stats.map(stat => stat.base_stat),
+                                    backgroundColor: [
+                                        'rgba(255, 99, 132, 0.5)',
+                                        'rgba(54, 162, 235, 0.5)',
+                                        'rgba(255, 206, 86, 0.5)',
+                                        'rgba(75, 192, 192, 0.5)',
+                                        'rgba(153, 102, 255, 0.5)',
+                                        'rgba(255, 159, 64, 0.5)'
+                                    ],
+                                    borderColor: [
+                                        'rgba(255, 99, 132, 1)',
+                                        'rgba(54, 162, 235, 1)',
+                                        'rgba(255, 206, 86, 1)',
+                                        'rgba(75, 192, 192, 1)',
+                                        'rgba(153, 102, 255, 1)',
+                                        'rgba(255, 159, 64, 1)'
+                                    ],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    x: {
+                                        ticks: {
+                                            color: 'purple',
+                                            font: { size: 15 }
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                })
+                .catch(err => console.error(err));
+        };
+
+    </script>
+</body>
+</html>
